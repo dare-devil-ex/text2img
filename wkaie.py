@@ -66,7 +66,6 @@ def saveAct():
     win2 = tk.Tk()
     win2.title("Save Activity")
     win2.geometry("250x250")
-    
     entry = tk.Entry(win2, width=30)
     entry.pack(pady=4)
     
@@ -83,8 +82,6 @@ def refresh():
         imglabel.forget()
     except:
         pass
-    
-
 
 label = tk.Label(root, text="TEXT2IMG", font=("Arial", 14))
 label.pack(pady=5)
