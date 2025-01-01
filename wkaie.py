@@ -4,13 +4,14 @@ try:
     import requests
     import time
     from io import BytesIO
-    from os import system as wkaie
+    from os import system
+    from datetime import datetime as dt
     from PIL import Image, ImageTk
     import tkinter as tk
 except:
-    wkaie("pip install PILLOW")
-    wkaie("pip install requests")
-    wkaie("pip install tkinter")
+    system("pip install PILLOW")
+    system("pip install requests")
+    system("pip install tkinter")
 
 root = tk.Tk()
 root.title("Text2Img")
@@ -60,22 +61,32 @@ def output():
     image_tk = ImageTk.PhotoImage(image)
     imglabel = tk.Label(root, image=image_tk)
     imglabel.pack()
-    root.mainloop()
+    try:
+        root.mainloop()
+    except KeyboardInterrupt:
+        pass
     
 def saveAct():
     win2 = tk.Tk()
     win2.title("Save Activity")
+    win2.Label(root, text="Entering file name is optional", font=("Arial", 8))
     win2.geometry("250x250")
     entry = tk.Entry(win2, width=30)
     entry.pack(pady=4)
-    
     def fetch():
-        inp = entry.get()
-        image.save("{}.jpg".format(inp))
-    
+        if entry.get():
+            inp = entry.get()
+        else:
+            inp = str(dt.now().date())
+        try:
+            image.save("{}.jpg".format(inp))
+        except Exception as e:
+            print("Error:", e)
+            root.destroy()
+            win2.destroy()
+            
     buttonSave = tk.Button(win2, text="SAVE", command=fetch)
     buttonSave.pack(pady=5)
-    
     tk.Label(win2, text="wkaie").pack(pady=99)
 
 def refresh():
@@ -96,4 +107,7 @@ button.pack(pady=1)
 button = tk.Button(root, text="SAVE", command=saveAct)
 button.pack(pady=1)
 
-root.mainloop()
+try:
+    root.mainloop()
+except KeyboardInterrupt:
+    print("This  program was developed by dare-devil-ex\nThank you!")
