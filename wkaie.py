@@ -69,8 +69,8 @@ def output():
 def saveAct():
     win2 = tk.Tk()
     win2.title("Save Activity")
-    win2.Label(root, text="Entering file name is optional", font=("Arial", 8))
     win2.geometry("250x250")
+    tk.Label(win2, text="Entering file name is optional", font=("Arial", 8)).pack()
     entry = tk.Entry(win2, width=30)
     entry.pack(pady=4)
     def fetch():
