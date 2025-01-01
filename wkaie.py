@@ -75,6 +75,8 @@ def saveAct():
     
     buttonSave = tk.Button(win2, text="SAVE", command=fetch)
     buttonSave.pack(pady=5)
+    
+    tk.Label(win2, text="wkaie").pack(pady=99)
 
 def refresh():
     global imglabel
