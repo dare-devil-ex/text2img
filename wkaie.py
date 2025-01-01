@@ -1,8 +1,16 @@
-import requests
-import time
-from io import BytesIO
-from PIL import Image, ImageTk
-import tkinter as tk
+# Author: dare_devil_ex
+
+try:
+    import requests
+    import time
+    from io import BytesIO
+    from os import system as wkaie
+    from PIL import Image, ImageTk
+    import tkinter as tk
+except:
+    wkaie("pip install PILLOW")
+    wkaie("pip install requests")
+    wkaie("pip install tkinter")
 
 root = tk.Tk()
 root.title("Text2Img")
@@ -46,7 +54,6 @@ def output():
     prompt = entry.get()
     image_data = Ai(prompt)
     image_data = BytesIO(image_data)
-
     image = Image.open(image_data)
     image_tk = ImageTk.PhotoImage(image)
     label = tk.Label(root, image=image_tk)
@@ -54,16 +61,11 @@ def output():
     tk.mainloop()
 
 
-label = tk.Label(root, text="WELCOME", font=("Arial", 14))
-label.pack(pady=20)
-
+label = tk.Label(root, text="TEXT2IMG", font=("Arial", 14))
+label.pack(pady=5)
 entry = tk.Entry(root, font=("Arial", 14))
-entry.pack(pady=40)
-
+entry.pack(pady=7)
 button = tk.Button(root, text="Submit", command=output)
 button.pack(pady=1)
-
-
-#
 
 root.mainloop()
