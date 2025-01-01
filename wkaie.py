@@ -1,4 +1,5 @@
 # Author: dare_devil_ex
+# Remainder: Changing credits doesn't make you a programmer 
 
 try:
     import requests
