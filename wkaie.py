@@ -51,21 +51,50 @@ def Ai(prompt):
     return None
 
 def output():
+    global imglabel, image
     prompt = entry.get()
     image_data = Ai(prompt)
     image_data = BytesIO(image_data)
     image = Image.open(image_data)
+    image = image.resize((500, 500))
     image_tk = ImageTk.PhotoImage(image)
-    label = tk.Label(root, image=image_tk)
-    label.pack()
-    tk.mainloop()
+    imglabel = tk.Label(root, image=image_tk)
+    imglabel.pack()
+    root.mainloop()
+    
+def saveAct():
+    win2 = tk.Tk()
+    win2.title("Save Activity")
+    win2.geometry("250x250")
+    
+    entry = tk.Entry(win2, width=30)
+    entry.pack(pady=4)
+    
+    def fetch():
+        inp = entry.get()
+        image.save("{}.jpg".format(inp))
+    
+    buttonSave = tk.Button(win2, text="SAVE", command=fetch)
+    buttonSave.pack(pady=5)
+
+def refresh():
+    global imglabel
+    try:
+        imglabel.forget()
+    except:
+        pass
+    
 
 
 label = tk.Label(root, text="TEXT2IMG", font=("Arial", 14))
 label.pack(pady=5)
-entry = tk.Entry(root, font=("Arial", 14))
+entry = tk.Entry(root, font=("Arial", 14), width=30)
 entry.pack(pady=7)
-button = tk.Button(root, text="Submit", command=output)
+button = tk.Button(root, text="GENERATE IMAGE", command=output)
+button.pack(pady=1)
+button = tk.Button(root, text="REFRESH", command=refresh)
+button.pack(pady=1)
+button = tk.Button(root, text="SAVE", command=saveAct)
 button.pack(pady=1)
 
 root.mainloop()
