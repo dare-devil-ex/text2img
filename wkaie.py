@@ -15,7 +15,7 @@ except:
 
 root = tk.Tk()
 root.title("Text2Img")
-root.geometry("1080x720")
+root.geometry("1080x1090")
 API_URL = "https://ai-api.magicstudio.com/api/ai-art-generator"
 
 HEADERS = {
@@ -52,13 +52,14 @@ def Ai(prompt):
     return None
 
 def output():
-    global imglabel, image
+    global imglabel, imagex
     prompt = entry.get()
     image_data = Ai(prompt)
     image_data = BytesIO(image_data)
     image = Image.open(image_data)
-    image = image.resize((500, 500))
-    image_tk = ImageTk.PhotoImage(image)
+    imagex = image.resize((1440, 1440))
+    ShowImg = image.resize((800, 800))
+    image_tk = ImageTk.PhotoImage(ShowImg)
     imglabel = tk.Label(root, image=image_tk)
     imglabel.pack()
     try:
@@ -79,7 +80,7 @@ def saveAct():
         else:
             inp = str(dt.now().date())
         try:
-            image.save("{}.jpg".format(inp))
+            imagex.save("{}.jpg".format(inp))
         except Exception as e:
             print("Error:", e)
             root.destroy()
